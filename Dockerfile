@@ -61,6 +61,7 @@ RUN mkdir -p /var/cache/fontconfig /home/nextjs/.cache/fontconfig /home/nextjs/.
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/migrations ./migrations
 
 RUN mkdir -p .next/cache \
     && chown -R nextjs:nodejs .next
