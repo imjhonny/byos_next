@@ -1,6 +1,6 @@
 import { connection } from "next/server";
 import { Suspense } from "react";
-import { fetchRecipes } from "@/app/actions/mixup";
+import { listAllRecipes } from "@/lib/recipes/catalog";
 import { PageTemplate } from "@/components/common/page-template";
 import DbNotConfiguredErrorCard from "@/components/error-cards/db-not-configured-error-card";
 import { getDbStatus } from "@/lib/database/utils";
@@ -23,7 +23,7 @@ export default async function PlaylistsPage() {
 
 	const [{ playlists, playlistItems }, recipes] = await Promise.all([
 		getInitData(),
-		fetchRecipes(),
+		listAllRecipes(),
 	]);
 
 	return (

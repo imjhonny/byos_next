@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState } from "react";
 import { fetchPlaylistWithItems } from "@/app/actions/playlist";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import type { Recipe } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { PlaylistFilmstrip } from "./playlist-filmstrip";
 import {
@@ -20,7 +19,7 @@ interface PlaylistBuilderProps {
 		name: string;
 		items?: FrameData[];
 	};
-	recipes: Recipe[];
+	recipes: { slug: string; name: string }[];
 	onSave: (data: { id?: string; name: string; items: FrameData[] }) => void;
 	onCancel: () => void;
 	isSaving?: boolean;

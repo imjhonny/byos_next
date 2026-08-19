@@ -1,14 +1,14 @@
 "use client";
 
 import { Film, Plus } from "lucide-react";
-import type { Playlist, PlaylistItem, Recipe } from "@/lib/types";
+import type { Playlist, PlaylistItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { PlaylistReelCard } from "./playlist-reel-card";
 
 interface PlaylistListProps {
 	playlists: Playlist[];
 	playlistItems: PlaylistItem[];
-	recipes: Recipe[];
+	recipes: { slug: string; name: string }[];
 	onEditPlaylist?: (playlist: Playlist) => void;
 	onDeletePlaylist?: (playlistId: string) => void;
 	onCreatePlaylist?: () => void;
