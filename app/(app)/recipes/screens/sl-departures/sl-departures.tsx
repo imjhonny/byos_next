@@ -144,7 +144,14 @@ function TripRow({ trip, index }: { trip: Trip; index: number }) {
 
 			{/* Changes */}
 			{trip.changes > 0 && (
-				<div style={{ fontSize: 10, color: "#888", minWidth: 32, textAlign: "right" }}>
+				<div
+					style={{
+						fontSize: 10,
+						color: "#888",
+						minWidth: 32,
+						textAlign: "right",
+					}}
+				>
 					{trip.changes} chg
 				</div>
 			)}
@@ -161,7 +168,11 @@ export default function SlDepartures({
 	width = DEFAULT_IMAGE_WIDTH,
 	height = DEFAULT_IMAGE_HEIGHT,
 	screen,
-}: SlDeparturesData & { width?: number; height?: number; screen?: ScreenProfile }) {
+}: SlDeparturesData & {
+	width?: number;
+	height?: number;
+	screen?: ScreenProfile;
+}) {
 	const screenProfile = screen ?? createScreenProfile({ width, height });
 	const w = screenProfile.logicalWidth;
 	const h = screenProfile.logicalHeight;
@@ -190,14 +201,24 @@ export default function SlDepartures({
 					}}
 				>
 					<div style={{ display: "flex", flexDirection: "column" }}>
-						<div style={{ fontSize: 11, color: "#666", letterSpacing: "0.08em" }}>
+						<div
+							style={{ fontSize: 11, color: "#666", letterSpacing: "0.08em" }}
+						>
 							FROM
 						</div>
 						<div style={{ fontSize: 16, fontWeight: 700 }}>{origin}</div>
 					</div>
 					<div style={{ fontSize: 20, color: "#000" }}>→</div>
-					<div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-						<div style={{ fontSize: 11, color: "#666", letterSpacing: "0.08em" }}>
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "flex-end",
+						}}
+					>
+						<div
+							style={{ fontSize: 11, color: "#666", letterSpacing: "0.08em" }}
+						>
 							TO
 						</div>
 						<div style={{ fontSize: 16, fontWeight: 700 }}>{destination}</div>

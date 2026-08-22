@@ -116,7 +116,11 @@ export default function HomelabStats({
 	width = DEFAULT_IMAGE_WIDTH,
 	height = DEFAULT_IMAGE_HEIGHT,
 	screen,
-}: HomelabStatsData & { width?: number; height?: number; screen?: ScreenProfile }) {
+}: HomelabStatsData & {
+	width?: number;
+	height?: number;
+	screen?: ScreenProfile;
+}) {
 	const screenProfile = screen ?? createScreenProfile({ width, height });
 	const w = screenProfile.logicalWidth;
 	const h = screenProfile.logicalHeight;
@@ -149,7 +153,9 @@ export default function HomelabStats({
 						borderBottom: "2px solid #000",
 					}}
 				>
-					<div style={{ fontSize: 20, fontWeight: 700, letterSpacing: "0.1em" }}>
+					<div
+						style={{ fontSize: 20, fontWeight: 700, letterSpacing: "0.1em" }}
+					>
 						BURAINDO
 					</div>
 					<div style={{ fontSize: 14, color: "#444" }}>{updatedAt}</div>
@@ -239,8 +245,7 @@ export const definition: RecipeDefinition<
 	meta: {
 		slug: "homelab-stats",
 		title: "Homelab Stats",
-		description:
-			"Live CPU, RAM, disk, pod count and uptime from Prometheus.",
+		description: "Live CPU, RAM, disk, pod count and uptime from Prometheus.",
 		published: true,
 		tags: ["homelab", "prometheus", "live-data", "infrastructure"],
 		category: "display-components",

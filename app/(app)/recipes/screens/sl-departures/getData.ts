@@ -59,11 +59,11 @@ function parseDuration(dur?: string): number {
 	if (dur.startsWith("PT")) {
 		const m = dur.match(/(\d+)H/);
 		const s = dur.match(/(\d+)M/);
-		return (m ? parseInt(m[1]) * 60 : 0) + (s ? parseInt(s[1]) : 0);
+		return (m ? parseInt(m[1], 10) * 60 : 0) + (s ? parseInt(s[1], 10) : 0);
 	}
 	const parts = dur.split(":").map(Number);
 	if (parts.length === 3) return parts[0] * 60 + parts[1];
-	return parseInt(dur) || 0;
+	return parseInt(dur, 10) || 0;
 }
 
 function legMode(leg: ResRobotLeg): { mode: string; line: string } {
@@ -151,12 +151,12 @@ export default async function getData(params?: {
 
 		const trips: Trip[] = rawTrips.map((t) => {
 			const legs = toLegs(t.LegList?.Leg);
-			const first = legs.find((l) => l.mode !== "Walk");
-			const last = [...legs].reverse().find((l) => l.mode !== "Walk");
+			const _first = legs.find((l) => l.mode !== "Walk");
+			const _last = [...legs].reverse().find((l) => l.mode !== "Walk");
 
 			// Get times from raw legs for accuracy
 			const rawLegs = Array.isArray(t.LegList?.Leg)
-				? t.LegList?.Leg ?? []
+				? (t.LegList?.Leg ?? [])
 				: t.LegList?.Leg
 					? [t.LegList.Leg]
 					: [];
@@ -170,7 +170,9 @@ export default async function getData(params?: {
 				departureTime: parseTime(depRaw),
 				arrivalTime: parseTime(arrRaw),
 				durationMin: parseDuration(t.dur),
-				changes: t.chg ?? Math.max(0, legs.filter((l) => l.mode !== "Walk").length - 1),
+				changes:
+					t.chg ??
+					Math.max(0, legs.filter((l) => l.mode !== "Walk").length - 1),
 				legs: legs.filter((l) => l.mode !== "Walk"),
 			};
 		});
